@@ -1,4 +1,9 @@
 # DL-ZE-turbulence-model
 Coupling TensorlFlow deep learning models to OpenFOAM for RANS simulations
 
-ciaoo
+* This is a thing i need to write
+
+** Requirements
+
+- Openfoam something
+- Tensorflow something else

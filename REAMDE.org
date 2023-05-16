@@ -1,8 +1,0 @@
-# DL-ZE-turbulence-model
-
-* This is a thing i need to write
-
-** Requirements
-
-- Openfoam something
-- Tensorflow something else
