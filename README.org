@@ -41,8 +41,10 @@ Deep learning - RANS CFD framework is an approach to create a coupled framework 
 ** Authors
 
 Giovanni Calzolari and Wei Liu
-Civil and architectural engineering
-KTH. Royal Institute of Technology, Stockholm, Sweden
 
-Ask information or questions to gcal@kth.se
+Civil and architectural engineering
+
+KTH, Royal Institute of Technology, Stockholm, Sweden
+
+For information or questions, send email to ~gcal@kth.se~
 
