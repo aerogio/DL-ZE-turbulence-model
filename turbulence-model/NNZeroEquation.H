@@ -22,22 +22,20 @@ License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
 Class
-    Foam::RASModels::mlp_0eq_2i
+    Foam::RASModels::NNZeroEquation
 
 Description
-    Zero-Equation deep learning driven turbulence model that directly computes the turbulent viscosity with a simple relation depending on magnitude of the velocity and a length scale (mininum distance to a wall). Works for indoor airflow. The turbulent viscosity is computed by 
+    Zero-Equation deep learning driven turbulence model that directly computes the turbulent viscosity with a simple relation depending on magnitude of the velocity and a length scale (mininum distance to a wall). Suitable for built environment flow domains with relative low velocity magnitudes.
+    Author: Giovanni Calzolari gcal@kth.se
+    KTH, Royal Institute of Technology, Stockholm, Sweden
 
-    Reference for zero equation model:
-    \verbatim
-        Chen, Qingyan, and Weiran Xu. "A zero-equation turbulence model for indoor airflow simulation." Energy and buildings 28.2 (1998): 137-144.
-
-SourceFiles
-    mlp_0eq_2i.C
+    SourceFiles
+    NNZeroEquation.C
 
 \*---------------------------------------------------------------------------*/
 
-#ifndef mlp_0eq_2i_H
-#define mlp_0eq_2i_H
+#ifndef NNZeroEquation_H
+#define NNZeroEquation_H
 
 #include "RASModel.H"
 #include "eddyViscosity.H"
@@ -54,26 +52,25 @@ namespace RASModels
 {
 
 /*---------------------------------------------------------------------------*\
-    Class mlp_0eq_2i Declaration
+    Class NNZeroEquation Declaration
     \*---------------------------------------------------------------------------*/
 
 template<class BasicMomentumTransportModel>
-class mlp_0eq_2i
+class NNZeroEquation
 :
     public eddyViscosity<RASModel<BasicMomentumTransportModel>>
 {
     // Private Member Functions
 
         // Disallow default bitwise copy construct and assignment
-    mlp_0eq_2i(const mlp_0eq_2i&);
-    void operator=(const mlp_0eq_2i&);
-
+    NNZeroEquation(const NNZeroEquation&);
+    void operator=(const NNZeroEquation&);
 
 protected:
 
     // Protected data
 
-    // Model coefficients
+    // Model coefficients 
     const string ANNmodelDir_;
     TF_Graph* Graph;
     TF_Status* Status;
@@ -91,10 +88,12 @@ protected:
     const char* saved_model_dir;
     // Fields
     const volScalarField& y_;
+    
     // Protected Member Functions
     virtual void correctNut();
-    // virtual void loadMLP();
-    void run_mlp(int num_inputs, int num_outputs);
+
+    
+    void run_NN(int num_inputs, int num_outputs);
     static void NoOpDeallocator(void* data, size_t a, void* b) {};
     static float Clamp( float value, float min, float max ) {
         return (value < min) ? min : (value > max) ? max : value;
@@ -106,12 +105,11 @@ public:
     typedef typename BasicMomentumTransportModel::rhoField rhoField;
     typedef typename BasicMomentumTransportModel::transportModel transportModel;
 
-
     //- Runtime type information
-    TypeName("mlp_0eq_2i");
+    TypeName("NNZeroEquation");
 
     //- Construct from components
-    mlp_0eq_2i
+    NNZeroEquation
     (
         const alphaField& alpha,
         const rhoField& rho,
@@ -123,7 +121,7 @@ public:
     );
 
     //- Destructor
-    virtual ~mlp_0eq_2i()
+    virtual ~NNZeroEquation()
         {}
     
     // Member Functions
@@ -131,9 +129,8 @@ public:
     virtual bool read();
 
 
-    //FROM SPALART ALLMARAS
+    // k and epsilon, to keep the RANS class
     virtual tmp<volScalarField> k() const;
-    //FROM SPALART ALLMARAS
     virtual tmp<volScalarField> epsilon() const;
 
     //- Solve the turbulence equations and correct the turbulence viscosity
@@ -149,7 +146,7 @@ public:
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 #ifdef NoRepository
-#include "mlp_0eq_2i.C"
+#include "NNZeroEquation.C"
 #endif
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
