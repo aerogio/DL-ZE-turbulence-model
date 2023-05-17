@@ -37,3 +37,12 @@ Deep learning - RANS CFD framework is an approach to create a coupled framework 
 - TensorFlow 2.6.2, Tensorflow C API 2.6
 - Python 3.6.9
 - OpenFOAM 9
+
+** Authors
+
+Giovanni Calzolari and Wei Liu
+Civil and architectural engineering
+KTH. Royal Institute of Technology, Stockholm, Sweden
+
+Ask information or questions to gcal@kth.se
+
