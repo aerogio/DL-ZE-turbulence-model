@@ -6,8 +6,8 @@ Deep learning - RANS CFD framework is an approach to create a coupled framework 
 
 ** Features
 
-1. ~deep-learning-model/~ contains the information and code for the training of the deep learning model
-2. ~turbulence-model/~ contains the code for the deep learning based zero-equation turbulence model in OpenFOAM. The model is an example of zero-equation model which load a TensorFlow deep learning model to directly predict values of /eddy viscosity/ using velocity magnitude and wall distance as input of the simulation. The turbulence can be used with a standard OpenFOAM solver without needing to change the solver itself. The boundary conditions required are the same as a standard zero equation model. Besides that the setup of the simulation is identical to the one of a standard turbulence model. The ~constant/momentumTransport~ OpenFOAM file needs to be provided with the information of the turbulence model, specifically:
+*** ~deep-learning-model/~ contains the information and code for the training of the deep learning model
+*** ~turbulence-model/~ contains the code for the deep learning based zero-equation turbulence model in OpenFOAM. The model is an example of zero-equation model which load a TensorFlow deep learning model to directly predict values of /eddy viscosity/ using velocity magnitude and wall distance as input of the simulation. The turbulence can be used with a standard OpenFOAM solver without needing to change the solver itself. The boundary conditions required are the same as a standard zero equation model. Besides that the setup of the simulation is identical to the one of a standard turbulence model. The ~constant/momentumTransport~ OpenFOAM file needs to be provided with the information of the turbulence model, specifically:
 
    #+begin_src c++
      simulationType RAS;
@@ -22,8 +22,8 @@ Deep learning - RANS CFD framework is an approach to create a coupled framework 
      }
    #+end_src
 for example this does this
-   
-3. ~python_requirements.txt~ contains the python requirements to run the python code
+
+*** ~python_requirements.txt~ contains the python requirements to run the python code
 
 
 ** Software requirements
