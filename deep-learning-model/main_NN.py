@@ -11,39 +11,37 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import sys
 import utilities_NN.py as u
 
-MODEL_FOLDER = 'Models/'
-
-# Create seed
+# Create random seed
 seed_value = 18
 seed_value = u.create_seed(seed_value)
 
 # Set information about the model and the training 
 vi = 1.366; A = 0.8128; M = 1.2192; B = 1.6256
-act = activations.relu
 patience_value = 100
 nepochs = 800
 
-nn_50 = u.nn([A, M, B], [1, vi, 2], [24, 36, 50], ['U', 'WallDistance'])
+nn_50 = u.nn([24, 36, 50])
 nns = [nn_50]
 
 for nn in nns:
+    # obtain pandas data-set
     df = u.clean_dataset(nn)
     test_percentage = 0.2
+    # split data-set into training and validation set
     trn, val = train_test_split(df, test_size=test_percentage, random_state=seed_value, shuffle=True)
-
+    
+    # remove label from training data-set as the eddy viscosity
     trn_lab = trn.pop('nut')
     val_lab = val.pop('nut')
-    if 'U' in nn.inputs:
-        trn_U = trn['U']
-        val_U = val['U']
-    else:
-        trn_U = trn.pop('U')
-        val_U = val.pop('U')
+    
+    # input tensor shape
     nx, ni = trn.shape
-
-    nn.model = u.create_model_norm(nn.layers, trn, act, print_summary=False)
-    nn = u.train_and_save_model(nn, patience_value, nepochs, trn, val, trn_lab, val_lab, seed_value, MODEL_FOLDER, save_model=True, plot_hist=True)
-    nn, trn_pre, val_pre = u.load_and_predict(nn, trn, val, trn_lab, val_lab, seed_value, MODEL_FOLDER, print_error=True, load_model=True)
+    # create tensorflow model architecture
+    nn.model = u.create_model(nn.layers, trn)
+    # train and save the model
+    nn = u.train_and_save_model(nn, patience_value, nepochs, trn, val, trn_lab, val_lab, seed_value)
+    # predict and compute error
+    nn, trn_pre, val_pre = u.predict_model(nn, trn, val, trn_lab, val_lab, seed_value)
 
 
     
