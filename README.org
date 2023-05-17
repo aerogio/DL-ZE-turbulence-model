@@ -1,8 +1,30 @@
 # DL-ZE-turbulence-model
-Coupling TensorlFlow deep learning models to OpenFOAM for RANS simulations
-This worked is done.
 
-* This is a thing i need to write
+*Deep learning - CFD coupled framework.*
+
+This shows an approach on how to create a coupled framework between deep learning models and an OpenFOAM simulation using the TensorFlow API. Specifically as an example, the implementation of a deep learning based zero-equation RANS turbulence model for built environment CFD simulations is provided.
+
+The deep learning model used is a standard multi-layer-perceptron
+
+* Software requirements
+
+- TensorFlow 3.idk
+- 
+
+* Contents
+
+1. *Tensorflow-model/* folder:
+
+#+begin_src python
+
+print('ciao')
+#+end_src
+
+This contains the code to train the deep learning model. 
+
+** DL-ZE model folder
+
+This contains
 
 ** Requirements
 
