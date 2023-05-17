@@ -7,44 +7,17 @@ import random
 import os
 from tensorflow.keras import layers, models, activations, optimizers, losses, callbacks
 from sklearn.metrics import mean_squared_error
-
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import sys
-sys.path.append('/NOBACKUP2/gcal/Scripts/Python/')
-import general_gio_functions as gio
-u = gio.reload_utilities('CF')
+import utilities_NN.py as u
 
-MODEL_FOLDER = 'Best_Models/'
-# # USE ONLY CPU
-# os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+MODEL_FOLDER = 'Models/'
 
 seed_value = 18
 seed_value = u.create_seed(seed_value)
 vi = 1.366; A = 0.8128; M = 1.2192; B = 1.6256
 
-# nn7 = nn([M], [vi], [27, 461, 315, 256, 160, 474, 385], ['U', 'WallDistance'])
-# nn74i = nn([M], [vi], [27, 461, 315, 256, 160, 474, 385], ['Ux', 'Uy', 'Uz', 'WallDistance'])
-# nn75i = nn([M], [vi], [27, 461, 315, 256, 160, 474, 385], ['Ux', 'Uy', 'Uz', 'WallDistance', 'U'])
-# nn3 = nn([M], [vi], [9, 175, 414], ['U', 'WallDistance'])
-nnOld = u.nn([M], [vi], [64, 64, 32, 16], ['U', 'WallDistance'])
-nnT = u.nn([M], [vi], [64, 64, 32, 16], ['U', 'WallDistance', 'Tgrad'])
-nnj_512 = u.nn([M], [vi], [25, 264, 214], ['U', 'WallDistance'])
-nnj_50 = u.nn([M], [vi], [13, 37, 31], ['U', 'WallDistance'])
-nnb_50 = u.nn([M], [vi], [48, 45, 21], ['U', 'WallDistance'])
-nnc_50 = u.nn([M], [1, vi, 2], [41, 40, 21], ['U', 'WallDistance'])
-nnd_50 = u.nn([M], [1, vi, 2], [13, 37, 31], ['U', 'WallDistance'])
-nne_50 = u.nn([A, M, B], [1, vi, 2], [22, 42, 19], ['U', 'WallDistance'])
-nnf_50 = u.nn([A, M, B], [1, vi, 2], [24, 36, 50], ['U', 'WallDistance'])
-# nn4 = nn([M], [vi], [64, 64, 32, 16], ['Ux', 'Uy', 'Uz', 'WallDistance'])
-
-# nn1 = nn([M], [vi], [299], ['Ux', 'Uy', 'Uz', 'WallDistance'])
-# nn0 = nn([M], [vi], [259,450,94,437,385,342], ['U', 'WallDistance'])
-# nn1 = nn([M], [vi], [132,15,326,434,377,11,58], ['U', 'WallDistance'])
-nn2 = u.nn([M], [vi], [352, 442, 102, 337], ['U', 'WallDistance'])
-# nn6 = nn([M], [vi], [243,181,232,67,25,195,147], ['U', 'WallDistance'])
-# nn4 = nn([M], [vi], [94, 138, 137, 358], ['Ux', 'Uy', 'Uz', 'WallDistance'])
-# nn5 = nn([M], [vi], [92, 101, 159, 450, 313], ['Ux', 'Uy', 'Uz', 'WallDistance'])
-# nn6 = nn([M], [vi], [10, 118, 100, 457, 163, 107], ['Ux', 'Uy', 'Uz', 'WallDistance'])
+nn_50 = u.nn([A, M, B], [1, vi, 2], [24, 36, 50], ['U', 'WallDistance'])
 nns = [nnf_50]
 
 # nns = [nn20]

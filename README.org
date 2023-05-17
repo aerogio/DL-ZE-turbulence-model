@@ -4,20 +4,15 @@
 
 Deep learning - RANS CFD framework is an approach to create a coupled framework between a deep learning model trained in python and the OpenFOAM software. The implementation makes use of the TensorFlow C API. Specifically, the implementation shows the creation of a deep learning based zero-equation RANS turbulence model for built environment CFD simulations. The deep learning model of choice is a standard Multi-Layer Perceptron
 
-** Software requirements
+** Features
 
-- TensorFlow 2.6.2, Tensorflow C API 2.6
-- Python 3.6.9
-- OpenFOAM 9
+1. ~deep-learning-model/~ contains the information and code for the training of the deep learning model
+2. ~turbulence-model/~ contains the code for the deep learning based zero-equation turbulence model in OpenFOAM. The model is an example of zero-equation model which load a TensorFlow deep learning model to directly predict values of /eddy viscosity/ using velocity magnitude and wall distance as input of the simulation. The turbulence can be used with a standard OpenFOAM solver without needing to change the solver itself. The boundary conditions required are the same as a standard zero equation model. Besides that the setup of the simulation is identical to the one of a standard turbulence model. The ~constant/momentumTransport~ OpenFOAM file needs to be provided with the information of the turbulence model, specifically:
 
-** Contents
-
-1. ~Tensorflow-model/~ contains the information and code for the training of the deep learning model
-2. ~turbulence-model/~ contains the code for the deep learning based zero-equation turbulence model in OpenFOAM. The model is an example of zero-equation model which load a TensorFlow deep learning model to directly predict values of /eddy viscosity/ using velocity magnitude and wall distance as input of the simulation. The turbulence can be used with a standard OpenFOAM solver without needing to change the solver itself. The boundary conditions required are the same as a standard zero equation model. Besides that the setup of the simulation is identical to the one of a standard turbulence model. In the ~constant/momentumTransport~ file it is necessary to define:
    #+begin_src c++
      simulationType RAS;
      ANNmodelDir path/to/the/trained/tensorflow/model;
-     // for example ~/DL-ZE-turbulence-model/TensorFlow-model/Models~
+     // for example /DL-ZE-turbulence-model/deep-learning-model/Models/MLP;
 
      RAS
      {
@@ -26,11 +21,13 @@ Deep learning - RANS CFD framework is an approach to create a coupled framework 
          printCoeffs    on;
      }
    #+end_src
-   # - ~RASModel NNZeroEquation.C~
-   # - ~ANNmodelDir path/to/the/trained/tensorflow/model~ for example ~/DL-ZE-turbulence-model/TensorFlow-model/Models~ in this repository.
-
-It is needed to specify the location path of the deep learning saved model. 
 
 
 3. ~python_requirements.txt~ contains the python requirements to run the python code
 
+
+** Software requirements
+
+- TensorFlow 2.6.2, Tensorflow C API 2.6
+- Python 3.6.9
+- OpenFOAM 9
