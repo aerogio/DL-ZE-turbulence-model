@@ -14,8 +14,20 @@ Deep learning - RANS CFD framework is an approach to create a coupled framework 
 
 1. ~Tensorflow-model/~ contains the information and code for the training of the deep learning model
 2. ~turbulence-model/~ contains the code for the deep learning based zero-equation turbulence model in OpenFOAM. The model is an example of zero-equation model which load a TensorFlow deep learning model to directly predict values of /eddy viscosity/ using velocity magnitude and wall distance as input of the simulation. The turbulence can be used with a standard OpenFOAM solver without needing to change the solver itself. The boundary conditions required are the same as a standard zero equation model. Besides that the setup of the simulation is identical to the one of a standard turbulence model. In the ~constant/momentumTransport~ file it is necessary to define:
-   - ~RASModel NNZeroEquation.C~
-   - ~ANNmodelDir path/to/the/trained/tensorflow/model~ for example ~/DL-ZE-turbulence-model/TensorFlow-model/Models~ in this repository.
+   #+begin_src c++
+     simulationType RAS;
+     ANNmodelDir path/to/the/trained/tensorflow/model;
+     // for example ~/DL-ZE-turbulence-model/TensorFlow-model/Models~
+
+     RAS
+     {
+         RASModel       NNZeroEquation;
+         turbulence     on;
+         printCoeffs    on;
+     }
+   #+end_src
+   # - ~RASModel NNZeroEquation.C~
+   # - ~ANNmodelDir path/to/the/trained/tensorflow/model~ for example ~/DL-ZE-turbulence-model/TensorFlow-model/Models~ in this repository.
 
 It is needed to specify the location path of the deep learning saved model. 
 
