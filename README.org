@@ -13,7 +13,7 @@ The deep learning model used is a standard multi-layer-perceptron
 
 ** Contents
 
-1. *Tensorflow-model/* folder: src_sh[:exports code]{ciao this is a code}
+1. *Tensorflow-model/* folder: src_sh[:exports code]{ciao this is a code} . This is ~code~
 
 #+begin_src python
 
