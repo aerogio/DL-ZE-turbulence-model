@@ -8,17 +8,16 @@ The deep learning model used is a standard multi-layer-perceptron
 
 ** Software requirements
 
-- TensorFlow 3.idk
-- 
+- TensorFlow 2.6.2
+- Python 3.6.9
+- OpenFOAM 9
 
 ** Contents
 
-1. *Tensorflow-model/* folder: src_sh[:exports code]{ciao this is a code} . This is ~code~
+1. ~Tensorflow-model/~ contains the information and code for the training of the deep learning model
+2. ~OF-model~ contains the code for the turbulence model
 
-#+begin_src python
 
-print('ciao')
-#+end_src
 
 This contains the code to train the deep learning model. 
 
