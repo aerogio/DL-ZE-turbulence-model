@@ -1,4 +1,0 @@
-Maybe these should only be python requirements
-- python
-- tensorflow
-- Openfoam
